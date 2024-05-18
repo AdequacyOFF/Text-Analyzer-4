@@ -20,16 +20,7 @@
     background: rgb(255, 255, 255);
 }
 
-.section{
-    position: absolute;
-    width: 1701px;
-    height: 945px;
-    left: 110px;
-    right: 109px;
-    top: 50px;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0);
-}
+
 
 .btn-doc-doc{
     position: absolute;
