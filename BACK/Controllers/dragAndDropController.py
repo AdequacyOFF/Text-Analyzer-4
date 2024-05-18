@@ -2,7 +2,6 @@ import os
 import docx
 from flask import request, Response
 from werkzeug.utils import secure_filename
-from NeuralNetwork.sentiment_classifier import SentimentClassifier
 from extensionConverters.pdfConverter import pdfConvert
 from extensionConverters.image2text import ImageReader
 
