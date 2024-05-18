@@ -9,7 +9,7 @@ from extensionConverters.image2text import ImageReader
 def allowed_file(filename, allowedExtensions):
     return '.' in filename and filename.rsplit('.', 1)[1] in allowedExtensions
 
-def file_process(uploadFolder, allowedExtensions):
+def file_process(uploadFolder, allowedExtensions, classifier):
     if (not os.path.exists("Files")):
         os.mkdir("Files")
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def file_process(uploadFolder, allowedExtensions):
                     text = reader.read(filepath)
                 case _: return Response("Unsuported extension", status=507)
 
-            classifier = SentimentClassifier()
+            
             return Response(classifier.summary(text), content_type="application/json")
         
     

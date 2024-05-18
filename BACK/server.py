@@ -12,6 +12,7 @@ ALLOWED_EXTENSIONS = set(['txt','pdf','png', 'img', 'jpg', 'jpeg', 'doc', 'docx'
 app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+classifier = SentimentClassifier()
 
 @app.before_request
 def basic_authentication():
