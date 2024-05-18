@@ -1,4 +1,3 @@
-
 from Controllers.dragAndDropController import file_process
 from Controllers.urlController import url_process
 from Controllers.textController import text_process

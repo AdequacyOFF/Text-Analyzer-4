@@ -1,9 +1,32 @@
 import React from "react";
 import { Mychart } from "./Chart.jsx";
 import { TotalChart } from "./TotalChart.jsx";
+import { useState } from "react";
+import '../Pages_css/OutPutText.css';
 
 function OutputText({ array }) {
   console.log(array);
+  const [inputValue, setInputValue] = useState("");
+  const [responseData, setResponseData] = useState([]);
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    fetch('http://127.0.0.1:8080/OutPutText', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      
+      body: JSON.stringify({ inputValue }),
+    })
+    .then((response) => response.json())
+    .then((data) => setResponseData(data));
+  };
+
+  console.log(JSON.stringify({ inputValue }));
 
   return (
     <div>
@@ -15,11 +38,27 @@ function OutputText({ array }) {
               <Mychart array={item} />
             </div>
           }
+          {
+            <div className="input_edit_block">
+              <textarea autosize 
+                key={index}
+                className="input_edit"
+                placeholder="Отредактируйте выделенный фрагмент текста..."
+                onChange={handleChange}
+                style={{resize: 'none'}}
+              >
+              </textarea>
+              <button className='Fix_btn' type="button" onClick={handleSubmit}>
+                <img src="src\Images\Fix_text.png" alt="Fix" />
+              </button>
+            </div>
+          }
           {item["profanity_flag"] && (
             <div className="profanity_flag_block">
               <span className="profanity_flag"><span className="profanity_flag_attention">Внимание:</span>Текст содержит ненормативную лексику</span>
             </div>
           )}
+          {<hr className='Strip'></hr>}
         </span>
       ))}
       <div className="TotalDiogram">
