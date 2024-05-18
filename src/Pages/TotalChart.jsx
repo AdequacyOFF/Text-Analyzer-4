@@ -1,18 +1,18 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function TotalChart(array) {
   console.log("TotalChart array: ", array);
   const data = {
-  labels: ["neutral",
-      "joy",
-      "sadness",
-      "surprise",
-      "fear",
-      "anger"],
+  labels: ["Нейтральный",
+      "Радость",
+      "Печаль",
+      "Удивление",
+      "Страх",
+      "Гнев"],
   datasets: [
     {
       label: "Text analysis based on emotions",
@@ -42,7 +42,8 @@ export function TotalChart(array) {
     },
   ],
 };
-  return <Pie data={data} 
+
+  return <Doughnut data={data} 
               width={200}
               height={200}
               options={{ maintainAspectRatio: false }}/>;
