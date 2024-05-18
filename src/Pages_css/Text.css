@@ -9,19 +9,21 @@
 }
 
 .text_input{
+
     box-sizing: border-box;
     border: 4px solid rgb(89, 89, 89);
     border-radius: 15px;
     box-shadow: inset 0px 4px 14px 6px rgba(0, 0, 0, 0.25);
     background: rgb(42, 42, 42);
     /* position: absolute; */
-    width: 1034px;
-    height: 500px; 
-    
+    width: 60%;
+    height: 20%; 
     margin-left: 21.5%;
 }
 
-
+.section{
+  height: 100%;
+}
 
 .text_input{
     font-family: "NanitoSans", sans-serif;
@@ -43,15 +45,7 @@
     max-height: 100px;
 } */
 
-section{
-    position: absolute;
-    width: 1701px;
-    height: 100%;
-    left: 110px;
-    right: 109px;
-    top: 135px;
-    bottom: 0;
-}
+
 
 .Processing_btn {
   width: 458px;
