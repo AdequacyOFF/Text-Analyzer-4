@@ -26,21 +26,19 @@ function Text() {
   return (
     <div className="section">
 
-      <div>
+      <div style={{ height : '40vh'}}>
         <textarea autosize
-          className='input_field' //input_field
+          className='text_input' //input_field
           placeholder='Начните писать текст...'
           onChange={handleChange}
-          style={{ resize: 'none', height: '500px' }}
+          style={{ resize: 'none'}}
         />
         <button className='Processing_btn' type="button" onClick={handleSubmit}>
           <img src="src/Images/Processing.png" alt="Processing" />
         </button>
       </div>
       <div className='answer-txt'>
-        <div className='answer-txt-frame'>
           <OutputText array={responseData} />
-        </div>
       </div>
     </div>
   );
