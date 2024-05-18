@@ -10,16 +10,16 @@
 
 
 .Logo{
-    width: 267px;
-    height: 58px;
-    position: absolute;
-    left: 23px;
-    margin-top: 27px;
+    width: 10%;
+    height: auto;
+    display: inline-block;
+    margin-top: 4vh;
+    margin-left: 2vh;
 }
 
 .Head{
     background-color: rgb(42, 42, 42);
-    height: 106px;
+    height: 10vh;
     margin-top: -1%;
     box-shadow: 0px 15px 47px 6px rgba(0, 0, 0, 0.25);
 }
@@ -32,11 +32,14 @@
 
 .navigation{
     font-weight: 600;
-    font-size: 36px !important;
-    display: inline;
-    position: absolute;
+    font-size: 2vw !important;
+    display: inline-block;
     background-color: rgba(42, 42, 42, 1);
-    margin-top: 32px;
+}
+nav{
+    display: inline-block;
+    width: 80%;
+    text-align: center;
 }
 
 ul{
@@ -63,26 +66,22 @@ a::after{
     color: rgb(114, 114, 114);
 }
 
-
-
-.anable{
-    color: rgb(255, 255, 255);
+li{
+    margin-left: 4%;
+    margin-right: 5%;
 }
 
-.disable{
-    color: rgb(114, 114, 114);
-}
 
 .txt{
-    margin-left: 556px;
+
 }
 
 .doc{
-    margin-left: 764px;
+
 }
 
 .url{
-    margin-left: 1292px;
+
 }
 
 
