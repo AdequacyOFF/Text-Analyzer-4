@@ -26,7 +26,7 @@ function Text() {
   return (
     <div className="section">
 
-      <div style={{ height : '40vh'}}>
+      <div style={{ height : '70vh'}}>
         <textarea autosize
           className='text_input' //input_field
           placeholder='Начните писать текст...'
