@@ -81,8 +81,14 @@
 }
 
 .Processing_btn>img{
+  display: flex;
+  justify-content: center;
   width: 50%;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 4%;
+  padding-bottom: 4%;
 }
 
 
