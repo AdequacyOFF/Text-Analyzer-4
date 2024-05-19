@@ -26,7 +26,7 @@
 .Logo_znania{
   display: inline-block;
   width: 30% !important;
-  height: auto;
+  height: 40%;
   margin-left: 20% !important;
   margin-right: auto;
   margin-top: 10%;
@@ -35,13 +35,13 @@
 .Logo_AdOFF{
   display: inline-block;
   width: 30% !important;
-  height: auto;
+  height: 40%;
 }
 
 .Logo_tea_footer{
   display: block;
   width: 70% !important;
-  height: auto;
+  height: 30%;
   margin-left: 15%;
   margin-top: 7%;
   
@@ -58,13 +58,14 @@
 }
 
 .Cooperation_text {
+  height: 100%;
   grid-row: 0/1;
   grid-column: 3/4;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 .Cooperation_text a {
-  font-size: 0.65vw;
+  font-size: 80%;
   color: rgb(196, 196, 196);
 }
 
@@ -75,7 +76,7 @@
 }
 
 .emoji img{
-  height: auto;
+  height: 50%;
   width: 100%;
   margin-top: 5%;
 }
