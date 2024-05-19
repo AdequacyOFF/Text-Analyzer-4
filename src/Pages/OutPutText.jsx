@@ -26,6 +26,20 @@ function OutputText({ array }) {
     .then((data) => setResponseData(data));
   };
 
+  const handleSubmit2 = () => {
+    fetch('http://127.0.0.1:8080/OutPutText', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      
+      body: JSON.stringify({ inputValue }),
+    })
+    .then((response) => response.json())
+    .then((data) => setResponseData(data));
+  };
+
+
   console.log(JSON.stringify({ inputValue }));
 
   return (
@@ -64,6 +78,9 @@ function OutputText({ array }) {
       <div className="TotalDiogram">
         {(array[array.length - 1] != undefined) ? <TotalChart array={array[array.length - 1]} /> : null}
       </div>
+      <button className='Save_btn' type="button" onClick={handleSubmit2}>
+          <img src="src/Images/SaveButton.png" alt="Save" />
+      </button>
     </div>
   );
 }
