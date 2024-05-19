@@ -15,8 +15,8 @@
   box-shadow: inset 0px 4px 14px 6px rgba(0, 0, 0, 0.25);
   background: rgb(42, 42, 42);
   /* position: absolute; */
-  width: 1034px;
-  height: 65px;
+  width: 50%;
+  height: 100%;
   margin-left: 21.5%;
   top: 49px;
   margin-top: 2.5%;
@@ -38,12 +38,15 @@
 
 
 .answer-url{
-  width: 1033.74px;
-  margin-top: 150px;
+  min-height: 50vh;
+  width: 70%;
+  margin-top: 5vh;
   box-shadow: 10px 10px 16px 6px rgba(0, 0, 0, 0.25);
   background: rgb(255, 255, 255); 
-  margin-left: 20%;
-  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  padding: 1%;
   
 
 }
@@ -59,14 +62,13 @@ button {
   cursor: pointer;
 }
 .search_btn{
-  position: absolute;
-  margin-top: 3.4%;
-  margin-left: -3.5%;
+  width: 4%;
+  margin-left: -3%;
   
 }
 .search_btn>img{
-  width: 34px;
-  height: 34px;
+  width: 25%;
+  height: auto;
 }
 .search_btn:hover{
   opacity: 0.5;
@@ -75,6 +77,6 @@ button {
 .answer-url-frame{
   
   padding: 12px;
-  min-height: 1000px;
+  min-height: 50%;
 }
 

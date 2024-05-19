@@ -23,11 +23,9 @@
 
 .header{
     display: block;
+    height: 10vh;
 }
 
-.wrapper{
-    
-}
 .footer{
     display: block;
 }
