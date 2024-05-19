@@ -12,7 +12,9 @@ function Footer() {
         <div className='emoji'>
           <img src="src\Images\emoji.png" alt="" />
         </div>
-      <hr className='Strip'></hr>
+      <div className='Strip_block'>
+          <hr className='Strip'></hr>
+      </div>
       <Contacts/>
     </div>
   )

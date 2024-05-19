@@ -6,13 +6,9 @@ function Header() {
   return (
     <div className='Head'>
       <img src="src/Images/LOGO_tea.png" alt="" className='Logo'/>
-      <nav>
-        <ul>
-          <li className='navigation  '><Link to='/'>ТЕКСТ</Link></li>
-          <li className='navigation  '><Link to='/Document'>ЗАГРУЗИТЬ ДОКУМЕНТ</Link></li>
-          <li className='navigation  '><Link to='/Url'>URL</Link></li>
-        </ul>
-      </nav>
+          <Link to='/' className='txt'>ТЕКСТ</Link>
+          <Link to='/Document' className='doc'>ЗАГРУЗИТЬ ДОКУМЕНТ</Link>
+          <Link to='/Url' className='url'>URL</Link>
     </div>
   )
 }

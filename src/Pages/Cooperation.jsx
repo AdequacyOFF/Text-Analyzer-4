@@ -3,7 +3,7 @@
 function Cooperation() {
     return (
         <div className='Cooperation_text'>
-          <a href="https://знаниевики.рф" target="_blank" >знаниевики.рф</a>
+          <a href="https://знаниевики.рф" target="_blank"  className="hrefs">знаниевики.рф</a>
           <a href="#">adequacyoff-AO@yandex.ru</a>
           <a href="https://github.com/AdequacyOFF" target="_blank" >github.com/AdequacyOFF</a>
           <a href="https://t.me/siferony" target="_blank" >t.me/siferony</a>

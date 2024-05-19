@@ -23,7 +23,7 @@
 
 .header{
     display: block;
-    height: 10vh;
+    height: 10vw;
 }
 
 .footer{
@@ -32,6 +32,9 @@
 
 .main{
    display: block;
+   margin-top: 5vw;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 .neutral{
@@ -96,4 +99,26 @@
     font-family: "Impact", sans-serif;
     font-weight: 600px;
     font-size: 28px;
+}
+
+.main{
+    max-width: 1200px;
+}
+
+@media (max-width:1200px){
+    .main{
+        max-width: 970px;
+    }
+}
+
+@media (max-width:992px){
+    .main{
+        max-width: 750px;
+    }
+}
+
+@media (max-width:767px){
+    .main{
+        max-width: none;
+    }
 }
