@@ -1,8 +1,10 @@
 .Footer{
   background-color: rgb(42, 42, 42);
-  height: 210px;
-  margin-top: -1%;
+  height: 20vh;
   box-shadow: 0px 4px 38px 29px rgba(0, 0, 0, 0.25);
+  display: grid;
+  grid-template-columns: repeat(10,10%);
+  grid-template-rows: 60% 5% 35%;
 }
 
 
@@ -11,89 +13,91 @@
 }
 
 .Strip{
-  width: 1622px;
+  width: 80%;
+  grid-row: 2/2;
+  grid-column: 1/11;
   color: rgb(114, 114, 114);
   background-color: rgb(114, 114, 114);
   margin-left: auto;
   margin-right: auto;
-  margin-top: -10px;
-  
-  
 }
 
-.Logo_company{
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 10px;
-}
 
 .Logo_znania{
-  width: auto !important;
-  height: 50px;
-  margin-right: 10px;
-  margin-bottom: 7px;
+  display: inline-block;
+  width: 30% !important;
+  height: auto;
+  margin-left: 20% !important;
+  margin-right: auto;
+  margin-top: 10%;
 }
 
 .Logo_AdOFF{
-  width: 71px;
-  height: 71px;
-  margin-left: -15px;
-  margin-bottom: -5px;
+  display: inline-block;
+  width: 30% !important;
+  height: auto;
 }
 
 .Logo_tea_footer{
-  width: 102px;
-  height: 28px;
-  
+  display: block;
+  width: 70% !important;
+  height: auto;
+  margin-left: 15%;
+  margin-top: 7%;
   
 }
 
 .Logo_footer{
-  margin-left: 149px;
-  margin-bottom: 15px;
+  grid-row: 0/1;
+  grid-column: 2/3;
 }
 
 .Cooperation_text a {
   display: block;
-  margin-right: 10px;
+  
 }
 
 .Cooperation_text {
-  margin-top: 18px;
+  grid-row: 0/1;
+  grid-column: 3/4;
+  margin-top: 5%;
 }
 
 .Cooperation_text a {
-  font-size: 10px;
+  font-size: 0.65vw;
   color: rgb(196, 196, 196);
 }
 
-.Cooperation{
-  display: flex;
-  margin-right: 21px;
+.emoji{
+  grid-row: 1/1;
+  grid-column: 6/10;
+
 }
 
 .emoji img{
-  position: relative;
-  width: 604px;
-  height: 67px;
-  margin-top: 30px;
-  margin-left: 125%;
+  height: auto;
+  width: 100%;
+  margin-top: 5%;
 }
 
-
-.Copyright p{
-  color: rgb(114, 114, 114);
-  font-size: 16px;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 0px;
-}
-
-.icons_contact img{
-  width: 50px;
-  height: 50px;
+.contact_information{
+  grid-column: 5/7;
+  grid-row: 3/3;
 }
 
 .icons_contact{
-  margin-left: 45.8%;
+  text-align: center;
+}
+
+.Copyright p{
+  color: rgb(114, 114, 114);
+  font-size: 0.8vw;
+  font-weight: 400;
+  text-align: center;
+  margin-top: -1%;
+}
+
+.icons_contact img{
+  width: 12%;
+  height: auto;
 }

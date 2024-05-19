@@ -88,7 +88,7 @@
 
 .answer-txt{
   display: block;
-  min-height: 50%;
+  min-height: 50vh;
   width: 70%;
 
   box-shadow: 10px 10px 16px 6px rgba(0, 0, 0, 0.25);

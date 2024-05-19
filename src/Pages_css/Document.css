@@ -9,91 +9,32 @@
   }
 
 .answer-doc{
-    position: absolute;
-    width: 1033.74px;
-    height: 1533.43px;
-    left: 23px;
-    right: 644.26px;
-    top: 27px;
-    bottom: -615.43px;
+    display: inline-block;
+    width: 50%;
+    margin-left: 5%;
+    margin-top: 2%;
+    min-height: 70vh;
     box-shadow: 10px 10px 16px 6px rgba(0, 0, 0, 0.25);
     background: rgb(255, 255, 255);
 }
 
 
 
-.btn-doc-doc{
-    position: absolute;
-    width: 458px;
-    height: 93px;
-    left: 1212px;
-    right: -1212px;
-    top: 440px;
-    bottom: -440px;
-    border-radius: 42px;
-    box-shadow: 0px 6px 21px 2px rgba(0, 0, 0, 0.25);
-    background: rgb(238, 79, 18);
-}
-
-.btn-url-doc{
-    position: absolute;
-    width: 458px;
-    height: 93px;
-    left: 1212px;
-    right: -1212px;
-    top: 556px;
-    bottom: -556px;
-    border-radius: 42px;
-    box-shadow: 0px 6px 21px 2px rgba(0, 0, 0, 0.25);
-    background: rgb(238, 79, 18);
-
-}
-
-.btn-doc-doc:hover{
-    box-shadow: 0px 6px 21px 2px rgba(0, 0, 0, 0.25);
-    background: rgb(188, 62, 14);   
-}
-
-.btn-url-doc:active{
-    box-shadow: 0px 6px 21px 2px rgba(0, 0, 0, 0.25);
-    background: rgb(188, 62, 14);
-}
-
-.btn-url-text-doc{
-    color: rgb(255, 255, 255);
-    font-size: 36px;
-    font-weight: 700;
-    line-height: -1px;
-    letter-spacing: 0px;
-    text-decoration: none;
-    width: 458px;
-    height: 93px;
-}
-
-.btn-doc-text-doc{
-    color: rgb(255, 255, 255);
-    font-size: 36px;
-    font-weight: 700;
-    line-height: -1px;
-    letter-spacing: 0px;
-    text-decoration: none;
-    height: 100px;
-}
 
 .DropFileInput{
     font-family: "NanitoSans", sans-serif;
 }
 
 .DropFileInput{
-    margin-left: 1212px;
-    margin-top: 30px;
-    height: 458px;
-    width: auto;
+    display: inline-block;
+    margin-top: -50%;
+    margin-left: 10%;
+    height: auto;
+    width: 20%;
 }
 
 .answer-doc{
-    padding: 20px;
+    padding: 1%;
     white-space: pre-wrap;
     overflow-wrap: break-word;
-    max-width: 100%;
 }
