@@ -2,6 +2,8 @@ from Controllers.dragAndDropController import file_process
 from Controllers.urlController import url_process
 from Controllers.textController import text_process
 from Controllers.basicAuthController import basic_auth
+from Controllers.wikiEditController import wiki_edit
+from NeuralNetwork.sentiment_classifier import SentimentClassifier
 from flask import Flask
 from flask_cors import CORS
 
@@ -11,6 +13,7 @@ ALLOWED_EXTENSIONS = set(['txt','pdf','png', 'img', 'jpg', 'jpeg', 'doc', 'docx'
 app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+classifier = SentimentClassifier()
 
 @app.before_request
 def basic_authentication():
@@ -18,14 +21,18 @@ def basic_authentication():
     
 @app.route('/text', methods=['POST'])
 def text_processing():
-    return text_process()
+    return text_process(classifier)
 
 @app.route('/url', methods=['GET', 'POST'])
 def url_processing():
-    return url_process()
+    return url_process(classifier)
 
 @app.route('/filesUpload', methods=['POST'])
 def file_processing():
-    return file_process(app.config['UPLOAD_FOLDER'], ALLOWED_EXTENSIONS)
+    return file_process(app.config['UPLOAD_FOLDER'], ALLOWED_EXTENSIONS, classifier)
+
+@app.route('/wikiEditor', methods=['GET', 'POST'])
+def wiki_editing():
+    return wiki_edit(classifier)
 
 app.run(host='127.0.0.1', port=8080)

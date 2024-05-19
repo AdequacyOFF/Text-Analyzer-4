@@ -21,3 +21,5 @@ opencv_python==4.9.0.80
 scikit_learn==1.4.1.post1
 tqdm==4.65.0
 python-docx==1.1.2
+mwparserfromhell==0.6.6
+pywikibot==9.1.2
