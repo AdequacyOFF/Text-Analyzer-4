@@ -14,29 +14,24 @@ function OutputText({ array }) {
   };
 
   const handleSubmit = () => {
-    fetch('http://127.0.0.1:8080/OutPutText', {
+    fetch('http://127.0.0.1:8080/text', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      
       body: JSON.stringify({ inputValue }),
     })
     .then((response) => response.json())
     .then((data) => setResponseData(data));
   };
 
-  const handleSubmit2 = () => {
-    fetch('http://127.0.0.1:8080/OutPutText', {
-      method: 'POST',
+  const handleSave = () => {
+    fetch('http://127.0.0.1:8080/text', {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
+        'publishArticle': true,
       },
-      
-      body: JSON.stringify({ inputValue }),
     })
-    .then((response) => response.json())
-    .then((data) => setResponseData(data));
   };
 
 
@@ -78,9 +73,14 @@ function OutputText({ array }) {
       <div className="TotalDiogram">
         {(array[array.length - 1] != undefined) ? <TotalChart array={array[array.length - 1]} /> : null}
       </div>
-      <button className='Save_btn' type="button" onClick={handleSubmit2}>
-          <img src="src/Images/SaveButton.png" alt="Save" />
-      </button>
+      <div>
+        {(array != array.length) ? 
+          (<button className='Save_btn' type="button" onClick={handleSave}>
+            <img src="src/Images/SaveButton.png" alt="Save" />
+          </button>)
+          : null
+        }
+      </div>
     </div>
   );
 }
