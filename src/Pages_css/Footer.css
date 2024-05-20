@@ -1,6 +1,6 @@
 .Footer{
   background-color: rgb(42, 42, 42);
-  height: 17vw;
+  height: 8vw;
   box-shadow: 0px 4px 38px 29px rgba(0, 0, 0, 0.25);
 }
 
@@ -11,14 +11,14 @@
 
 .Strip{
   display: block;
-  margin-top: 10vw;
+  margin-top: 5vw;
   width: 100%;
   color: rgb(114, 114, 114);
   background-color: rgb(114, 114, 114);
 }
 .Strip_block{
   position: absolute;
-  height: 15vw;
+  height: 7.5vw;
   width: 90vw;
   left: 5vw;
 }
@@ -26,31 +26,31 @@
 
 .Logo_znania{
   display: inline-block;
-  width: 30% !important;
+  width: 40% !important;
   height: auto;
   margin-left: 20% !important;
   margin-right: auto;
-  margin-top: 10%;
+  margin-top: 17%;
 }
 
 .Logo_AdOFF{
   display: inline-block;
-  width: 30% !important;
+  width: 40% !important;
   height: auto;
 }
 
 .Logo_tea_footer{
   display: inline-block;
-  width: 70% !important;
+  width: 80% !important;
   height: auto;
   margin-left: 15%;
-  margin-top: 7%;
+  margin-top: 5%;
   
 }
 
 .Logo_footer{
   position: absolute;
-  width: 13vw;
+  width: 5vw;
   left: 5vw;
 }
 
@@ -60,35 +60,35 @@
 }
 
 .hrefs{
-  margin-top: 0.9vw;
+  margin-top: 0.45vw;
 }
 
 .Cooperation_text {
   position: absolute;
-  left: 18vw;
-  width: 12vw;
+  left: 10.5vw;
+  width: 6vw;
 
 }
 
 .Cooperation_text a {
-  font-size: 0.9vw;
+  font-size: 0.45vw;
   color: rgb(196, 196, 196);
 }
 
 .emoji{
   position: absolute;
-  width: 50vw;
-  left: 43vw;
+  width: 25vw;
+  left: 70vw;
 }
 
 .emoji img{
   height: auto;
   width: 100%;
-  margin-top: 2.4vw;
+  margin-top: 1.2vw;
 }
 
 .contact_information{
-  height: 17vw;
+  height: 8vw;
  width: 15vw;
  position: absolute;
  left: 40vw;
@@ -96,17 +96,17 @@
 
 .icons_contact{
   text-align: center;
-  margin-top: 12vw;
+  margin-top: 5.5vw;
 }
 
 .Copyright p{
   color: rgb(114, 114, 114);
-  font-size: 0.8vw;
+  font-size: 0.4vw;
   font-weight: 400;
   text-align: center;
 }
 
 .icons_contact img{
-  width: 15%;
+  width: 7.5%;
   height: auto;
 }

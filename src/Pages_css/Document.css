@@ -16,6 +16,7 @@
     min-height: 70vh;
     box-shadow: 10px 10px 16px 6px rgba(0, 0, 0, 0.25);
     background: rgb(255, 255, 255);
+    border-radius: 15px;
 }
 
 
@@ -26,9 +27,9 @@
 }
 
 .DropFileInput{
-    display: inline-block;
-    margin-top: -50%;
-    margin-left: 10%;
+    position: absolute;
+    margin-top: -70vh;
+    margin-left: 65vw;
     height: auto;
     width: 20%;
 }
