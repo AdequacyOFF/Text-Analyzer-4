@@ -13,10 +13,11 @@ function OutputText({ array }) {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (index) => {
     fetch('http://127.0.0.1:8080/outputText', {
       method: 'POST',
       headers: {
+        'indexToChange': index,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ inputValue }),
@@ -57,7 +58,8 @@ function OutputText({ array }) {
                 style={{resize: 'none'}}
               >
               </textarea>
-              <button className='Fix_btn' type="button" onClick={handleSubmit}>
+              {/* <button className='Fix_btn' type="button" onClick={handleSubmit}> */}
+              <button className='Fix_btn' type="button" onClick={() => handleSubmit(index)}>
                 <img src="src\Images\Fix_text.png" alt="Fix" />
               </button>
             </div>
