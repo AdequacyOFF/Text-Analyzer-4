@@ -134,10 +134,10 @@
 .uploadButton {
   font-family: "NanitoSans", sans-serif;
   font-weight: 600px;
-  font-size: 36px;
+  font-size: 3vw;
 }
 
 .uploadButton>img{
-  width: 40%;
+  width: 50%;
   height: auto;
 }
