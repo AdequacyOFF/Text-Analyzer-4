@@ -14,7 +14,7 @@ function OutputText({ array }) {
   };
 
   const handleSubmit = () => {
-    fetch('http://127.0.0.1:8080/text', {
+    fetch('http://127.0.0.1:8080/outputText', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ function OutputText({ array }) {
   };
 
   const handleSave = () => {
-    fetch('http://127.0.0.1:8080/text', {
+    fetch('http://127.0.0.1:8080/outputText', {
       method: 'GET',
       headers: {
         'publishArticle': true,
