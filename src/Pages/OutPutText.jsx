@@ -84,6 +84,12 @@ function OutputText({ inputArray }) {
       <div className="TotalDiogram">
         {(array[array.length - 1] != undefined) ? <TotalChart array={array[array.length - 1]} /> : null}
       </div>
+      <div className="Style">
+        {array.slice(0, array.length - 1).map((item, index) => (
+          <span key={index}>
+            <span className="TextStyleContent"><span  className="TextStyle">Стиль текста:</span>{item["text_style"]}</span>
+          </span>))}
+      </div>
       <div>
         {(array != array.length) ? 
           (<button className='Save_btn' type="button" onClick={handleSave}>
