@@ -2,6 +2,7 @@ from Controllers.dragAndDropController import file_process
 from Controllers.urlController import url_process
 from Controllers.textController import text_process
 from Controllers.basicAuthController import basic_auth
+from Controllers.outputTextController import article_edit, article_put, article_publish
 from NeuralNetwork.sentiment_classifier import SentimentClassifier
 from flask import Flask
 from flask_cors import CORS
@@ -29,5 +30,17 @@ def url_processing():
 @app.route('/filesUpload', methods=['GET', 'POST'])
 def file_processing():
     return file_process(app.config['UPLOAD_FOLDER'], ALLOWED_EXTENSIONS, classifier)
+
+@app.route('/outputText/articleEdit', methods=['POST'])
+def article_editing():
+    return article_edit(classifier)
+
+@app.route('/outputText/articlePut', methods=['POST'])
+def article_puting():
+    return article_put()
+
+@app.route('/outputText/articlePublish', methods=['GET'])
+def article_publishing():
+    return article_publish()
 
 app.run(host='127.0.0.1', port=8080)

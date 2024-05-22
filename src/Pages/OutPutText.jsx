@@ -4,29 +4,39 @@ import { TotalChart } from "./TotalChart.jsx";
 import { useState } from "react";
 import '../Pages_css/OutPutText.css';
 
-function OutputText({ array }) {
-  console.log(array);
+function OutputText({ inputArray }) {
+  console.log(inputArray);
   const [inputValue, setInputValue] = useState("");
-  const [responseData, setResponseData] = useState([]);
+  const [array, setArray] = useState(inputArray);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = () => {
-    fetch('http://127.0.0.1:8080/outputText', {
+  const handleSubmit = (index) => {
+    fetch('http://127.0.0.1:8080/outputText/articlePut', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ array }),
+    });
+
+    fetch('http://127.0.0.1:8080/outputText/articleEdit', {
       method: 'POST',
       headers: {
+        'indexToChange': index,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ inputValue }),
     })
     .then((response) => response.json())
-    .then((data) => setResponseData(data));
+    .then((data) => setArray(data));
+    console.log(array);
   };
 
   const handleSave = () => {
-    fetch('http://127.0.0.1:8080/outputText', {
+    fetch('http://127.0.0.1:8080/outputText/articlePublish', {
       method: 'GET',
       headers: {
         'publishArticle': true,
@@ -57,7 +67,8 @@ function OutputText({ array }) {
                 style={{resize: 'none'}}
               >
               </textarea>
-              <button className='Fix_btn' type="button" onClick={handleSubmit}>
+              {/* <button className='Fix_btn' type="button" onClick={handleSubmit}> */}
+              <button className='Fix_btn' type="button" onClick={() => handleSubmit(index)}>
                 <img src="src\Images\Fix_text.png" alt="Fix" />
               </button>
             </div>
