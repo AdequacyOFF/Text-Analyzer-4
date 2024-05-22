@@ -38,7 +38,7 @@ function Text() {
         </button>
       </div>
       <div className='answer-txt'>
-          <OutputText array={responseData} />
+        {responseData.length!=0 ? <OutputText inputArray={responseData}/> : null}
       </div>
     </div>
   );

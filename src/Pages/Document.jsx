@@ -18,7 +18,7 @@ function Document() {
   return (
     <div className='section'>
       <div className='answer-doc'>
-        <OutputText array={data} />
+        {data.length!=0 ? <OutputText inputArray={data}/> : null}
       </div>
       <div className='DropFileInput'>
           <DropFileInput onFileChange={(files) => onFileChange(files)} updateData={updateData}/> {/* Функция для перетаскивания файлов */}

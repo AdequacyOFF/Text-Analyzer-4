@@ -38,7 +38,7 @@ function Url() {
       </div>
       <div className='answer-url'>
         <div className='answer-url-frame'>
-          <OutputText array={responseData} />
+          {responseData.length!=0 ? <OutputText inputArray={responseData}/> : null}
         </div>
       </div>  
     </div>
