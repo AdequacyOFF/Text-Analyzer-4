@@ -4,8 +4,6 @@ import OutputText from "./OutPutText.jsx";
 
 
 function Url() {
-
-  
   
   const [responseData, setResponseData] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -26,14 +24,15 @@ function Url() {
     .then((data) => setResponseData(data));
   };
 
+  
   return (
     <div className="section">
 
 
-      <div>
+      <div className="answer_block">
         <input type="text" className='input_field' placeholder='Введите ссылку на источник(URL)...' onChange={handleChange} />
-        <button className='search_btn' type="button" onClick={handleSubmit}>
-          <img src="src\Images\search.png" alt="" />
+        <button className='Processing_btn' type="button" onClick={handleSubmit}>
+          <img src="src/Images/Processing.png" alt="Processing" />
         </button>
       </div>
       <div className='answer-url'>
