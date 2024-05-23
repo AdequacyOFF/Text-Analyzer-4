@@ -24,13 +24,19 @@ function Url() {
     .then((data) => setResponseData(data));
   };
 
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      handleSubmit();
+    }
+  };
+
   
   return (
     <div className="section">
 
 
       <div className="answer_block">
-        <input type="text" className='input_field' placeholder='Введите ссылку на источник(URL)...' onChange={handleChange} />
+        <input type="text" className='input_field' placeholder='Введите ссылку на источник(URL)...' onChange={handleChange} onKeyPress={handleKeyPress}/>
         <button className='Processing_btn' type="button" onClick={handleSubmit}>
           <img src="src/Images/Processing.png" alt="Processing" />
         </button>

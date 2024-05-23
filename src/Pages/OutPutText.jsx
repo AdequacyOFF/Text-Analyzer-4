@@ -50,8 +50,8 @@ function OutputText({ inputArray }) {
   return (
     <div>
       {array.slice(0, array.length - 1).map((item, index) => (
-        <span key={index} className={item["conclusion"] + " output-text"}>
-          {item["text"]}
+        <span key={index} className="output-text"  >
+          <span className={item["conclusion"]}>{item["text"]}</span>
           {
             <div className="Diogram">
               <Mychart array={item} />
