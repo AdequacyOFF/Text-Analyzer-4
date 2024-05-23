@@ -28,8 +28,8 @@
 
 .DropFileInput{
     position: absolute;
-    margin-top: -70vh;
-    margin-left: 65vw;
+    top: 23vh;
+    left: 65vw;
     height: auto;
     width: 20%;
 }
