@@ -2,6 +2,7 @@ import React from "react";
 import { Mychart } from "./Chart.jsx";
 import { TotalChart } from "./TotalChart.jsx";
 import { useState } from "react";
+import { TextStyle } from "./TextStyle.jsx";
 import '../Pages_css/OutPutText.css';
 
 function OutputText({ inputArray }) {
@@ -82,13 +83,10 @@ function OutputText({ inputArray }) {
         </span>
       ))}
       <div className="TotalDiogram">
-        {(array[array.length - 1] != undefined) ? <TotalChart array={array[array.length - 1]} /> : null}
+        {(array[array.length - 2] != undefined) ? <TotalChart array={array[array.length - 2]} /> : null}
       </div>
-      <div className="Style">
-        {array.slice(0, array.length - 1).map((item, index) => (
-          <span key={index}>
-            <span className="TextStyleContent"><span  className="TextStyle">Стиль текста:</span>{item["text_style"]}</span>
-          </span>))}
+      <div className="TextStyle">
+        {(array[array.length - 1] != undefined) ? <TextStyle array={array[array.length - 1]} /> : null}
       </div>
       <div>
         {(array != array.length) ? 
