@@ -1,8 +1,46 @@
 import re
+import torch
+import numpy as np
 
-def sentencer(text:str, num_sen=1):
-    split_regex = re.compile(r'[.|!|?|…|!?]')
-    splitted = list(filter(lambda t: t, [t.strip() for t in split_regex.split(text)]))
+def sentencer(text:str, num_sen=1, default_sen_len=30):    
+    splitted = []
+    
+    string = ''
+    i = 0
+    while True:
+      if i >= len(text):
+        if splitted.count(text) == 0 and len(string) > 5:
+          splitted.append(string)
+        break
+
+      char = text[i]
+      string += char
+      
+      if char == '.' or char == '!' or char == '?':
+      
+        if(i < len(text) - 1):
+          if text[i + 1] == '?':
+            string += text[i + 1]
+            i += 1
+            
+        if(i < len(text) - 2):
+          if text[i + 1] == '.' and text[i + 2] == '.':
+            string += text[i + 1]
+            string += text[i + 2]
+            i += 2
+        
+        if len(string) < default_sen_len:
+          i += 1
+          continue
+        
+        splitted.append(string)
+        
+        if i < len(text) - 1:
+          i += 1
+        
+        string = ''
+        
+      i += 1
     
     if num_sen == 1:
         return splitted
@@ -68,3 +106,38 @@ def find_profanity(text, dirt, lemmatizer):
     return None
   else:
     return remove_duplicates(list(r) + list(r1))
+  
+def make_sum_100(array):
+  arr_sum = array.sum()
+  
+  diff = abs(100 - arr_sum)
+  
+  if arr_sum > 100:
+    max_i = np.argmax(array)
+    
+    new_array = []
+    
+    for i in range(len(array)):
+      if i == max_i:
+        new_array.append(array[i] - diff)
+      else:
+        new_array.append(array[i])
+  else:
+    min_i = np.argmin(array)
+    
+    new_array = []
+    
+    for i in range(len(array)):
+      if i == min_i:
+        new_array.append(array[i] + diff)
+      else:
+        new_array.append(array[i])
+        
+  return np.array(new_array)
+    
+def get_device():
+  if torch.cuda.is_available():
+    return 'cuda:0'
+  else:
+    return 'cpu'
+  
