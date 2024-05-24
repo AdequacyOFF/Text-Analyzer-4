@@ -46,7 +46,11 @@ class TextAnalyser:
                                                                    problem_type='multi_label_classification')
         
         self.style_classifier = MLP(312, len(self.style_labels))
-        self.style_classifier.load_state_dict(torch.load(path_to_style_classifier))
+
+        if device == 'cpu':
+            self.style_classifier.load_state_dict(torch.load(path_to_style_classifier, map_location=torch.device('cpu')))
+        else:
+            self.style_classifier.load_state_dict(torch.load(path_to_style_classifier))
         
         # Put models on the device
         self.model = self.model.to(self.device)
