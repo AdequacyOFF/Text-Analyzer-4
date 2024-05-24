@@ -138,7 +138,9 @@
   font-size: 3vw;
 }
 
+
 .uploadButton>img{
-  width: 50%;
-  height: auto;
+  width: auto;
+  height: 1.3vw;
+  margin-bottom: 0.3vw;
 }
