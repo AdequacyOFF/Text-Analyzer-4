@@ -61,8 +61,10 @@ const DropFileInput = (props) => {
                                 <div key={index} className="drop-file-preview__item">
                                     <img src={ImageConfig[item.type.split('/')[1]] || ImageConfig['default']} alt="" />
                                     <div className="drop-file-preview__item__info">
-                                        <p>{item.name}</p>
-                                        <p>{item.size}B</p>
+                                        <p>{item.name.slice(0, 30)}...</p>
+                                        <p>{item.size > 1024 * 1024 ? `${Math.round(item.size / (1024 * 1024) * 10) / 10}MB` :
+                                            item.size > 1024 ? `${Math.round(item.size / 1024)}KB` :
+                                            `${Math.round(item.size)}B`}</p>
                                     </div>
                                     <span className="drop-file-preview__item__del" onClick={() => fileRemove(item)}>x</span>
                                 </div>
