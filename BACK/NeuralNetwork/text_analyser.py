@@ -24,7 +24,7 @@ class TextAnalyser:
         self.emotions_labels = ['neutral', 'joy', 'sadness', 'surprise', 'fear', 'anger']
         
         # Text style classification labels
-        self.style_labels = ['artistic', 'publicistic', 'scientific', 'conversational', 'official']
+        self.style_labels = ['Художественный', 'Публицистический', 'Научный', 'Разговорный', 'Официально-деловой']
         
         # Define parent directory for finding path to model checkpoint
         # and file with profanity 

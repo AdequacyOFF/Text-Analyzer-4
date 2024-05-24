@@ -1,8 +1,13 @@
 import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend);
 
 export function TextStyle(array) {
   console.log("TextStyle array: ", array);
@@ -15,20 +20,21 @@ export function TextStyle(array) {
   datasets: [
     {
       label: "Article analysis for styles",
-      data: [array["array"]["stylel_scientific_percent"],
-          array["array"]["style_publicistic_percent"],
-          array["array"]["stylel_official_percent"],
-          array["array"]["stylel_artistic_percent"],
-          array["array"]["stylel_conversational_percent"]],
+      data: [array["array"]["style_scientific_percent"] * 100,
+          array["array"]["style_publicistic_percent"] * 100,
+          array["array"]["style_official_percent"] * 100,
+          array["array"]["style_artistic_percent"] * 100,
+          array["array"]["style_conversational_percent"] * 100],
       // data: [40, 70, 80, 13, 30],
       backgroundColor: ["rgba(75,192,192,0.4)"],
+      borderColor: ["rgba(75,192,192,0.4)"],
       borderWidth: 1,
     },
   ],
 };
 
   return <Radar data={data} 
-              width={200}
-              height={200}
+              width={400}
+              height={400}
               options={{ maintainAspectRatio: false }}/>;
 }
