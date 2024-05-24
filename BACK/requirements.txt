@@ -1,7 +1,7 @@
 pymystem3==0.2.0
 gdown==5.1.0
 numpy==1.26.4
-torch==2.2.2
+torch==2.3.0+cu121
 transformers==4.40.0
 beautifulsoup4==4.12.3
 bs4==0.0.2

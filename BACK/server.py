@@ -3,7 +3,7 @@ from Controllers.urlController import url_process
 from Controllers.textController import text_process
 from Controllers.basicAuthController import basic_auth
 from Controllers.outputTextController import article_edit, article_put, article_publish
-from NeuralNetwork.sentiment_classifier import SentimentClassifier
+from NeuralNetwork.text_analyser import TextAnalyser
 from flask import Flask
 from flask_cors import CORS
 
@@ -13,7 +13,7 @@ ALLOWED_EXTENSIONS = set(['txt','pdf','png', 'img', 'jpg', 'jpeg', 'doc', 'docx'
 app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-classifier = SentimentClassifier()
+classifier = TextAnalyser()
 
 @app.before_request
 def basic_authentication():
