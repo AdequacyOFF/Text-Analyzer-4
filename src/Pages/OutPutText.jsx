@@ -50,7 +50,7 @@ function OutputText({ inputArray }) {
 
   return (
     <div>
-      {array.slice(0, array.length - 1).map((item, index) => (
+      {array.slice(0, array.length - 2).map((item, index) => (
         <span key={index} className="output-text"  >
           <span className={item["conclusion"]}>{item["text"]}</span>
           {
