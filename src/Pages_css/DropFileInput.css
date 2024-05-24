@@ -99,8 +99,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 10px;
-  top: 20%;
+  right: 4%;
+  top: 10%;
   transform: translateY(-50%);
   box-shadow: var(--box-shadow);
   cursor: pointer;
@@ -142,5 +142,5 @@
 .uploadButton>img{
   width: auto;
   height: 1.3vw;
-  margin-bottom: 0.3vw;
+  margin-bottom: 0.4vw;
 }
