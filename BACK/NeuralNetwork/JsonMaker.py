@@ -20,23 +20,24 @@ def makeJson(result, total_emotion_result, style_result):
         answer_list.append(total_dict)
 
         style_dict_values = []
+        style_classes = ["Artistic", "Publicistic", "Scientific", "Conversational", "Official-business"]
         match style_result[0]:
-            case ['Художественный']: 
-                style_dict_values.append('Artistic')
-            case ['Публицистический']: 
-                style_dict_values.append('Publicistic')
-            case ['Научный']: 
-                style_dict_values.append('Scientific')
-            case ['Разговорный']: 
-                style_dict_values.append('Conversational')
-            case ['Официально-деловой']: 
-                style_dict_values.append('Official-business')
+            case "Художественный": 
+                style_dict_values.append(style_classes[0])
+            case "Публицистический": 
+                style_dict_values.append(style_classes[1])
+            case "Научный": 
+                style_dict_values.append(style_classes[2])
+            case "Разговорный": 
+                style_dict_values.append(style_classes[3])
+            case "Официально-деловой": 
+                style_dict_values.append(style_classes[4])
         style_dict_values.append(style_result[0])
         style_dict_keys = ["style_class", "style_conclusion", "style_artistic_percent", "style_publicistic_percent", "style_scientific_percent", "style_conversational_percent", "style_official_percent"]
         for style in style_result[1:]:
             style_dict_values.append(style.astype(np.float64))
-            style_dict = dict(zip(style_dict_keys, style_dict_values))
-    
-        answer_list.append(style_dict)
+        style_dict = dict(zip(style_dict_keys, style_dict_values))
 
+        answer_list.append(style_dict)
+        print(answer_list)
         return json.dumps(answer_list, ensure_ascii=False, sort_keys=False)
