@@ -78,7 +78,7 @@ function OutputText({ inputArray }) {
           }
           {item["profanity_flag"] && (
             <div className="profanity_flag_block">
-              <span className="profanity_flag"><span className="profanity_flag_attention">Внимание:</span>Текст содержит ненормативную лексику</span>
+              <span className="profanity_flag"><span className="profanity_flag_attention">Внимание: </span>Текст содержит ненормативную лексику</span>
             </div>
           )}
           {<hr className='Strip'></hr>}

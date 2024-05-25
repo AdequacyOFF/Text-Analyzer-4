@@ -92,7 +92,7 @@
 
 .drop-file-preview__item__del {
   background-color: var(--box-bg);
-  width: 10%;
+  width: 5%;
   height: 10%;
   border-radius: 50%;
   display: flex;
