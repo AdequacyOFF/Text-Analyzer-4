@@ -18,6 +18,9 @@ function Url() {
     setInputValue(event.target.value);
   };
 
+  // useEffect(() => {
+  //   setInputValue(redirectUrl);
+  // }, [redirectUrl]);
 
   const handleSubmit = () => {
     fetch('http://127.0.0.1:8080/url', {
@@ -43,9 +46,10 @@ function Url() {
   
   return (
     <div className="section">
+      {/* <p>{redirectUrl}</p> */}
 
       <div className="answer_block">
-        <input type="text" className='input_field' velue={redirectUrl} placeholder='Введите ссылку на источник(URL)...'  onChange={handleChange} onKeyPress={handleKeyPress}/>
+        <input type="text" className='input_field' value={redirectUrl} placeholder='Введите ссылку на источник(URL)...'  onChange={handleChange} onKeyPress={handleKeyPress}/>
         <button className='Processing_btn' type="button" onClick={handleSubmit}>
           <img src="src/Images/Processing.png" alt="Processing" />
         </button>
