@@ -20,8 +20,19 @@ def makeJson(result, total_emotion_result, style_result):
         answer_list.append(total_dict)
 
         style_dict_values = []
+        match style_result[0]:
+            case ['Художественный']: 
+                style_dict_values.append('Artistic')
+            case ['Публицистический']: 
+                style_dict_values.append('Publicistic')
+            case ['Научный']: 
+                style_dict_values.append('Scientific')
+            case ['Разговорный']: 
+                style_dict_values.append('Conversational')
+            case ['Официально-деловой']: 
+                style_dict_values.append('Official-business')
         style_dict_values.append(style_result[0])
-        style_dict_keys = ["style_conclusion", "style_artistic_percent", "style_publicistic_percent", "style_scientific_percent", "style_conversational_percent", "style_official_percent"]
+        style_dict_keys = ["style_class", "style_conclusion", "style_artistic_percent", "style_publicistic_percent", "style_scientific_percent", "style_conversational_percent", "style_official_percent"]
         for style in style_result[1:]:
             style_dict_values.append(style.astype(np.float64))
             style_dict = dict(zip(style_dict_keys, style_dict_values))
