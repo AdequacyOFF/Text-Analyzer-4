@@ -4,6 +4,7 @@ from Controllers.textController import text_process
 from Controllers.basicAuthController import basic_auth
 from Controllers.outputTextController import article_edit, article_put, article_publish
 from NeuralNetwork.text_analyser import TextAnalyser
+from wikiBot.wikiBot import wikiBot
 from flask import Flask
 from flask_cors import CORS
 
@@ -14,6 +15,7 @@ app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 classifier = TextAnalyser()
+bot = wikiBot()
 
 @app.before_request
 def basic_authentication():

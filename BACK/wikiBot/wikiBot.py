@@ -1,17 +1,28 @@
 import requests
-class wikiBot:
-    def __init__(wikiFamily="https://baza.znanierussia.ru/mediawiki/"):
 
-        tokenUrl = wikiFamily + "api.php?action=query&meta=tokens&format=json" #для получения csrf токена
-        response = requests.get(tokenUrl)
+class wikiBot:
+    def __init__(self):
+        session = requests.Session()
+        wikiApiLink = "https://baza.znanierussia.ru/mediawiki/api.php"
+        tokenUrl = wikiApiLink + "?action=query&meta=tokens&format=json&type=login" #для получения login токена
+        response = session.get(tokenUrl)
         response_json = response.json()
-        print (response_json)
-        botToken = response_json["query"]["tokens"]["csrftoken"] #получили токен
+        botToken = response_json["query"]["tokens"]["logintoken"] #получили токен
         print(botToken)
 
-        botLogin = "Stalnoy Voin@textAnalyzerBot" 
+        botLogin = "Stalnoy Voin" 
         botPassword = "Andrey1Andrey"
-        url = wikiFamily+"/api.php?action=login&lgname="+botLogin+"&lgpassword="+botPassword+"&lgtoken="+botToken+"&format=json"
-        response = requests.get(url)
-        response_json = response.json()
-        print(response_json)
+        
+        loginParams = {
+            'action': "login",
+            'lgname': botLogin,
+            'lgpassword': botPassword,
+            'lgtoken': botToken,
+            'format': "json"
+        }
+
+        response = session.post(wikiApiLink, data=loginParams)
+        loginResponse = response.json()
+        print(loginResponse)
+        assert loginResponse['login']['result'] == 'Success'
+       
