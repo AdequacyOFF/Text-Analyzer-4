@@ -78,7 +78,46 @@ a::after{
     color: rgb(114, 114, 114);
 }
 
-
+@media (width < 900px) {
+    .Head{
+        height: 15vw;
+    }
+    .header{
+        height: 15vw;
+    }
+    .Logo{
+        width: 22.5vw;
+        height: auto;
+        position: absolute;
+        top: 4.5vw;
+        left: 3vw;
+    }
+    .txt{
+        font-weight: 600;
+        font-size: 4vw !important;
+        position: absolute;
+        top:2vw;
+        background-color: rgba(42, 42, 42, 1);
+        left: 46vw;
+    }
+    .doc{
+        font-weight: 600;
+        font-size: 4vw !important;
+        position: absolute;
+        top:6vw;
+        background-color: rgba(42, 42, 42, 1);
+        left: 35vw;
+        visibility: hidden;
+    }
+    .url{
+        font-weight: 600;
+        font-size: 4vw !important;
+        position: absolute;
+        top: 8vw;
+        background-color: rgba(42, 42, 42, 1);
+        left: 49vw;
+    }
+}
 
 
 
