@@ -4,8 +4,7 @@ import json
 
 processedArticle = []
 
-def article_put():
-    global processedArticle
+def article_save():
     processedArticle = request.json.get('array', None)
     print ("processed article:")
     print(processedArticle)
@@ -16,6 +15,3 @@ def article_edit(classifier):
     processedArticle[request.headers.get('indexToChange', type = int)] = newSentence[0]
     answer = json.dumps(processedArticle, ensure_ascii=False, sort_keys=False)
     return Response(answer, content_type="application/json")
-    
-def article_publish():
-    return Response(status=200, headers={'articlePublished': 1})
