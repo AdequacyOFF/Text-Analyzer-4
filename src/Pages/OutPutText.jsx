@@ -3,7 +3,9 @@ import { Mychart } from "./Chart.jsx";
 import { TotalChart } from "./TotalChart.jsx";
 import { useState } from "react";
 import { TextStyle } from "./TextStyle.jsx";
+import { StyleConclusions } from "./TextStyleConclusion.jsx";
 import '../Pages_css/OutPutText.css';
+import '../Pages_css/TextStyleConclusion.css';
 
 function OutputText({ inputArray }) {
   console.log(inputArray);
@@ -87,6 +89,9 @@ function OutputText({ inputArray }) {
       </div>
       <div className="TextStyle">
         {(array[array.length - 1] != undefined) ? <TextStyle array={array[array.length - 1]} /> : null}
+      </div>
+      <div className="TextStyleConclusion">
+        {(array[array.length - 1] != undefined) ? <StyleConclusions array={array[array.length - 1]} /> : null}
       </div>
       <div>
         {(array != array.length) ? 
