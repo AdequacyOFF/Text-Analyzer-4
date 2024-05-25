@@ -54,8 +54,8 @@ function OutputText({ inputArray }) {
         <span key={index} className="output-text"  >
           <span className={item["conclusion"]}>{item["text"]}</span>
           {
-            <div className="Diogram">
-              <Mychart array={item} />
+            <div className="Diogram"> 
+                <Mychart array={item} />
             </div>
           }
           {

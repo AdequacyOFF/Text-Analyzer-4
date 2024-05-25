@@ -1,26 +1,5 @@
 
 
-/* .header{
-    grid-column: 1/12;
-    grid-row: 1/1;
-}
-
-.wrapper{
-    display: grid;
-    grid-template-columns: repeat(11, 1fr) ;
-    grid-template-rows: 150px repeat(9, 1fr) 150px;
-}
-.footer{
-    z-index: 2;
-    grid-column: 1/12;
-    grid-row: 11/12;
-}
-
-.main{
-   grid-column: 1/12;
-   grid-row: 2/9;
-} */
-
 .header{
     display: block;
     height: 5vw;
@@ -68,7 +47,7 @@
     padding-right: 2px;
     font-family: "NanitoSans", sans-serif;
     font-weight: 600px;
-    font-size: 28px;
+    font-size: 1.4vw ;
 }
 
 .output-text {
@@ -78,10 +57,23 @@
 }
 
 .Diogram{
-    margin-left: 40%;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 70%;
+    width: 70vw;
+    font-size: 2vw;
 }
+
+
+
+.TotalDiogram{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 70%;
+    width: 70vw;
+    font-size: 2vw;
+}
+
 
 .profanity_flag{
     background-color: rgba(134, 6, 194, 0.5);

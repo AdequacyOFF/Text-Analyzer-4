@@ -44,7 +44,8 @@ export function TotalChart(array) {
 };
 
   return <Doughnut data={data} 
-              width={200}
-              height={200}
-              options={{ maintainAspectRatio: false }}/>;
+              options={{ 
+                responsive: true,
+                maintainAspectRatio: false 
+              }}/>;
 }

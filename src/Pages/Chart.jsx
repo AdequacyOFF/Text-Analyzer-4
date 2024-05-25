@@ -42,8 +42,9 @@ export function Mychart(array) {
     },
   ],
 };
-  return <Doughnut data={data} 
-              width={200}
-              height={200}
-              options={{ maintainAspectRatio: false }}/>;
+  return <Doughnut data={data}
+              options={{ 
+                responsive: true,
+                maintainAspectRatio: false 
+              }}/>;
 }

@@ -14,11 +14,9 @@
   border-radius: 15px;
   box-shadow: inset 0px 4px 14px 6px rgba(0, 0, 0, 0.25);
   background: rgb(42, 42, 42);
-  /* position: absolute; */
   width: 70%;
   height: 100%;
   margin-left: 15%;
-  top: 49px;
   margin-top: 2.5%;
 }
 
@@ -40,7 +38,7 @@
 .answer-url{
   min-height: 50vh;
   width: 70%;
-  margin-top: 5vh;
+  margin-top: 2vw;
   box-shadow: 10px 10px 16px 6px rgba(0, 0, 0, 0.25);
   background: rgb(255, 255, 255); 
   margin-left: auto;
@@ -60,18 +58,6 @@ button {
   /* отображаем курсор в виде руки при наведении; некоторые
   считают, что необходимо оставлять стрелочный вид для кнопок */
   cursor: pointer;
-}
-.search_btn{
-  width: 4%;
-  margin-left: -3%;
-  
-}
-.search_btn>img{
-  width: 25%;
-  height: auto;
-}
-.search_btn:hover{
-  opacity: 0.5;
 }
 
 .answer-url-frame{
