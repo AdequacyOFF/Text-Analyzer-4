@@ -1,16 +1,23 @@
 import { useState } from "react";
 import '../Pages_css/Url.css';
 import OutputText from "./OutPutText.jsx";
+import { useLocation } from 'react-router-dom';
 
 
 function Url() {
+
+  const location = useLocation();
+  const redirectUrl = new URLSearchParams(location.search).get('redirect_url');
   
   const [responseData, setResponseData] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
+  
+
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
+
 
   const handleSubmit = () => {
     fetch('http://127.0.0.1:8080/url', {
@@ -31,12 +38,14 @@ function Url() {
   };
 
   
+
+
+  
   return (
     <div className="section">
 
-
       <div className="answer_block">
-        <input type="text" className='input_field' placeholder='Введите ссылку на источник(URL)...' onChange={handleChange} onKeyPress={handleKeyPress}/>
+        <input type="text" className='input_field' velue={redirectUrl} placeholder='Введите ссылку на источник(URL)...'  onChange={handleChange} onKeyPress={handleKeyPress}/>
         <button className='Processing_btn' type="button" onClick={handleSubmit}>
           <img src="src/Images/Processing.png" alt="Processing" />
         </button>
