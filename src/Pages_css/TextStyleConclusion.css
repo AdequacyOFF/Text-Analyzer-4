@@ -1,7 +1,27 @@
-.StyleConclusions{
-  background-color: rgba(255, 159, 33, 0.5);
+
+.Artistic{
+  background-color: rgba(75, 192, 192, 0.5);
   border-radius: 10px;
-  
+}
+
+.Publicistic{
+  background-color: rgba(54, 162, 235, 0.5);
+  border-radius: 10px;
+}
+
+.Scientific{
+  background-color: rgba(255, 99, 132, 0.5);
+  border-radius: 10px;
+}
+
+.Conversational{
+  background-color: rgba(153, 102, 255, 0.5);
+  border-radius: 10px;
+}
+
+.Official-business{
+  background-color: rgba(255, 206, 86, 0.5);
+  border-radius: 10px;
 }
 
 .TextStyleConclusion{

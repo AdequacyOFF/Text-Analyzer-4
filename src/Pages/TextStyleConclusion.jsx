@@ -6,7 +6,7 @@ export function StyleConclusions({ array }) {
   
   return (
     <div>
-      <span className='StyleConclusions'><span className='StyleConclusions_definition'>Стиль текста:  </span>{array["style_conclusion"]}</span>
+      <span className={array["style_class"]}><span className='StyleConclusions_definition'>Стиль текста:  </span>{array["style_conclusion"]}</span>
     </div>
   );
 }
