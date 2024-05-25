@@ -2,7 +2,7 @@ from Controllers.dragAndDropController import file_process
 from Controllers.urlController import url_process
 from Controllers.textController import text_process
 from Controllers.basicAuthController import basic_auth
-from Controllers.outputTextController import article_edit, article_put, article_publish
+from Controllers.outputTextController import article_edit, article_save
 from NeuralNetwork.text_analyser import TextAnalyser
 from wikiBot.wikiBot import wikiBot
 from flask import Flask
@@ -15,7 +15,8 @@ app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 classifier = TextAnalyser()
-bot = wikiBot()
+bot = wikiBot("https://baza.znanierussia.ru/mediawiki/api.php")
+print(bot.article_get("Куартел-Жерал"))
 
 @app.before_request
 def basic_authentication():
@@ -37,12 +38,8 @@ def file_processing():
 def article_editing():
     return article_edit(classifier)
 
-@app.route('/outputText/articlePut', methods=['POST'])
-def article_puting():
-    return article_put()
-
-@app.route('/outputText/articlePublish', methods=['GET'])
-def article_publishing():
-    return article_publish()
+@app.route('/outputText/articleSave', methods=['POST'])
+def article_saving():
+    return article_save()
 
 app.run(host='127.0.0.1', port=8080)
