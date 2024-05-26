@@ -55,13 +55,18 @@ class wikiBot:
     
     def article_get(self, articleTitle):
         params = {
-        "action": "parse",
-        "page": articleTitle,
+        "action": "query",
+        "prop": "revisions",
+        "titles": articleTitle,
+        "rvslots": "*",
+        "rvprop": "content",
+        "formatversion": 2,
         "format": "json"
         }
 
         responce = self.session.get(url=self.wikiApiLink, params=params)
         getResponce = responce.json()
-        articleText = getResponce["parse"]["text"]["*"]
+        articleText = getResponce["query"]["pages"][0]["revisions"][0]["slots"]["main"]["content"]
+
         print(articleText)
         return articleText

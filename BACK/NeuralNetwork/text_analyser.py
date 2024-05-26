@@ -134,7 +134,7 @@ class TextAnalyser:
         
         # Make profanity analys
         prof_flag = self.profanity_analys(text)
-        
+        print("хуй1" + text)
         return (text, prediction, neutral_percent, joy_percent, sadness_percent, 
                 surprise_percent, fear_percent, anger_percent, prof_flag)
         
@@ -187,5 +187,5 @@ class TextAnalyser:
         for sentence in sentences:
             out = self.emotion_analys(sentence)
             result.append(out)
-        
+        print(result)
         return (makeJson(result, total_emotion_result, style_result))

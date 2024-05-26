@@ -2,7 +2,6 @@ import json
 import numpy as np
 
 def makeJson(result, total_emotion_result, style_result):
-        
         answer_list = []
         
         for data in result:

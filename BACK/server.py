@@ -16,7 +16,7 @@ CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 classifier = TextAnalyser()
 bot = wikiBot("https://baza.znanierussia.ru/mediawiki/api.php")
-print(bot.article_get("Куартел-Жерал"))
+print(bot.article_get("Кадацкий,_Иван_Федосеевич"))
 
 @app.before_request
 def basic_authentication():
@@ -28,7 +28,7 @@ def text_processing():
 
 @app.route('/url', methods=['GET', 'POST'])
 def url_processing():
-    return url_process(classifier)
+    return url_process(classifier, bot)
 
 @app.route('/filesUpload', methods=['GET', 'POST'])
 def file_processing():
@@ -38,7 +38,7 @@ def file_processing():
 def article_editing():
     return article_edit(classifier)
 
-@app.route('/outputText/articleSave', methods=['POST'])
+@app.route('/outputText/articleSave', methods=['GET'])
 def article_saving():
     return article_save()
 
