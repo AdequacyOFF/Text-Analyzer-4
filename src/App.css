@@ -87,7 +87,7 @@
 
 .profanity_flag_block{
     padding: 1%;
-    font-size: 2vw;
+    font-size: 1.8vw;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -100,7 +100,7 @@
 .profanity_flag_attention{
     font-family: "Impact", sans-serif;
     font-weight: 600px;
-    font-size: 2.5vw;
+    font-size: 2vw;
 }
 
 
