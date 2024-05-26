@@ -47,6 +47,7 @@ def sentencer(text:str, sen_num=1, min_segment_len=10):
   return_splitted = []
     
   for splitted in merged_splitted:
+    if len(splitted) > 1:
       return_splitted.append(splitted[:-1])
       
   del merged_splitted
