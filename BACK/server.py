@@ -2,7 +2,7 @@ from Controllers.dragAndDropController import file_process
 from Controllers.urlController import url_process
 from Controllers.textController import text_process
 from Controllers.basicAuthController import basic_auth
-from Controllers.outputTextController import article_edit, article_save
+from Controllers.outputTextController import article_edit, article_update, article_publish
 from NeuralNetwork.text_analyser import TextAnalyser
 from wikiBot.wikiBot import wikiBot
 from flask import Flask
@@ -37,8 +37,12 @@ def file_processing():
 def article_editing():
     return article_edit(classifier)
 
-@app.route('/outputText/articleSave', methods=['POST'])
-def article_saving():
-    return article_save()
+@app.route('/outputText/articleUpdate', methods=['POST'])
+def article_updating():
+    return article_update()
+
+@app.route('/outputText/articlePublish', methods=['GET'])
+def article_publishing():
+    return article_publish(bot)
 
 app.run(host='127.0.0.1', port=8080)

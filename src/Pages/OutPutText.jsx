@@ -7,7 +7,7 @@ import { StyleConclusions } from "./TextStyleConclusion.jsx";
 import '../Pages_css/OutPutText.css';
 import '../Pages_css/TextStyleConclusion.css';
 
-function OutputText({ inputArray }) {
+function OutputText({ inputArray, articleLink = "https://baza.znanierussia.ru/mediawiki/index.php/%D0%BC%D0%BE%D1%8F-%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F" }) {
   console.log(inputArray);
   const [inputValue, setInputValue] = useState("");
   const [array, setArray] = useState(inputArray);
@@ -17,7 +17,7 @@ function OutputText({ inputArray }) {
   };
 
   const handleSubmit = (index) => {
-    fetch('http://127.0.0.1:8080/outputText/articleSave', {
+    fetch('http://127.0.0.1:8080/outputText/articleUpdate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,11 +38,11 @@ function OutputText({ inputArray }) {
     console.log(array);
   };
 
-  const handleSave = () => {
+  const handlePublish = (articleLink) => {
     fetch('http://127.0.0.1:8080/outputText/articlePublish', {
       method: 'GET',
       headers: {
-        'publishArticle': true,
+        'articleLink': articleLink,
       },
     })
   };
@@ -95,7 +95,7 @@ function OutputText({ inputArray }) {
       </div>
       <div>
         {(array != array.length) ? 
-          (<button className='Save_btn' type="button" onClick={handleSave}>
+          (<button className='Save_btn' type="button" onClick={() => handlePublish(articleLink)}>
             <img src="src/Images/SaveButton.png" alt="Save" />
           </button>)
           : null

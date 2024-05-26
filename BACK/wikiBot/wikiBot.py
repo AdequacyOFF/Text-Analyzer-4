@@ -41,7 +41,18 @@ class wikiBot:
         self.csrfToken = csrfResponse['query']['tokens']['csrftoken']
         print("CSRF Token: " + self.csrfToken)
 
-    def article_save(self, newArticleText, articleTitle):
+    def get_article_from_link(self, link):
+        splitUrl = link.split('/')
+        articleTitle = splitUrl[len(splitUrl)-1]
+        finalTitle = articleTitle[:len(articleTitle)-1]
+        ruArticleTitle = unquote(finalTitle) 
+        print("ruArticleTitle: " + ruArticleTitle)
+        return ruArticleTitle
+
+    def article_publish(self, newArticleText, articleLink):
+        articleTitle = self.get_article_from_link(articleLink)
+        print("newArticleText: " + newArticleText)
+        print("articleTitle: " + articleTitle)
         params = {
         "action": "edit",
         "title": articleTitle,
@@ -49,18 +60,19 @@ class wikiBot:
         "text": newArticleText,
         "token": self.csrfToken
         }
-
+        print("Params: " + str(params))
         responce = self.session.post(self.wikiApiLink, data=params)
         saveResponse = responce.json()
+        print("Response: " + str(saveResponse))
         assert saveResponse['edit']['result'] == 'Success'
         return 0
     
-    def article_get(self, articleTitle):
-        ruArticleTitle = unquote(articleTitle) 
+    def article_get(self, articleLink):
+        articleTitle = self.get_article_from_link(articleLink)
         params = {
         "action": "query",
         "prop": "revisions",
-        "titles": ruArticleTitle,
+        "titles": articleTitle,
         "rvslots": "*",
         "rvprop": "content",
         "formatversion": 2,
@@ -75,3 +87,5 @@ class wikiBot:
 
         print(articleText)
         return articleText
+    
+    

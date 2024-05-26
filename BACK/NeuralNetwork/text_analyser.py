@@ -17,6 +17,8 @@ class TextAnalyser:
             self.device = U.get_device()
             if self.device == 'cpu':
                 print('\nCUDA is not available! Use CPU.')
+            else:
+                print('\nCUDA is available! Use CUDA.')
         else:
             self.device = device
         
@@ -138,7 +140,6 @@ class TextAnalyser:
         
         # Make profanity analys
         prof_flag = self.profanity_analys(text)
-        print("хуй1" + text)
         return (text, prediction, neutral_percent, joy_percent, sadness_percent, 
                 surprise_percent, fear_percent, anger_percent, prof_flag)
         
