@@ -56,6 +56,10 @@ class TextAnalyser:
         self.model = self.model.to(self.device)
         self.style_classifier = self.style_classifier.to(device)
         
+        # Set evaluation mode
+        self.model.eval()
+        self.style_classifier.eval()
+        
         # Load list with profanity from the file
         self.profanity_list = []
         
