@@ -49,7 +49,7 @@ class wikiBot:
         print("ruArticleTitle: " + ruArticleTitle)
         return ruArticleTitle
 
-    def article_publish(self, newArticleText, articleLink):
+    def article_publish(self, newArticleText, articleLink="http://localhost:8083/index.php/%D0%BC%D0%BE%D1%8F-%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F"):
         articleTitle = self.get_article_from_link(articleLink)
         print("newArticleText: " + newArticleText)
         print("articleTitle: " + articleTitle)
