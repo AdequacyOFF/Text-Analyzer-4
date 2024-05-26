@@ -1,4 +1,5 @@
 import requests
+from urllib.parse import unquote
 
 class wikiBot:
     
@@ -25,8 +26,9 @@ class wikiBot:
 
         response = self.session.post(self.wikiApiLink, data=loginParams)
         loginResponse = response.json()
-        print(loginResponse)
+        
         assert loginResponse['login']['result'] == 'Success'
+        print("Bot logged in successfully")
 
         #получаем csrf токен
         CsrfParams = { 
@@ -54,18 +56,21 @@ class wikiBot:
         return 0
     
     def article_get(self, articleTitle):
+        ruArticleTitle = unquote(articleTitle) 
         params = {
         "action": "query",
         "prop": "revisions",
-        "titles": articleTitle,
+        "titles": ruArticleTitle,
         "rvslots": "*",
         "rvprop": "content",
         "formatversion": 2,
         "format": "json"
         }
-
+        
         responce = self.session.get(url=self.wikiApiLink, params=params)
         getResponce = responce.json()
+        print("Response: " + str(getResponce))
+        assert getResponce["query"]["pages"][0]["revisions"][0]["slots"]["main"]["content"] != None
         articleText = getResponce["query"]["pages"][0]["revisions"][0]["slots"]["main"]["content"]
 
         print(articleText)

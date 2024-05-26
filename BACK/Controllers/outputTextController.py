@@ -5,6 +5,7 @@ import json
 processedArticle = []
 
 def article_save():
+    global processedArticle
     processedArticle = request.json.get('array', None)
     print ("processed article:")
     print(processedArticle)

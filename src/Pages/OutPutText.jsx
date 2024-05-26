@@ -17,7 +17,7 @@ function OutputText({ inputArray }) {
   };
 
   const handleSubmit = (index) => {
-    fetch('http://127.0.0.1:8080/outputText/articlePut', {
+    fetch('http://127.0.0.1:8080/outputText/articleSave', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
