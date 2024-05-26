@@ -130,6 +130,7 @@
 .TextStyle{
   margin-top: 10%;
   margin-bottom: 5%;
+  font-family: "NanitoSans", sans-serif;
 }
 @media(width < 900px){
   .Save_btn{
