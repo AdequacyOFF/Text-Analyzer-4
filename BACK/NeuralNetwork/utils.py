@@ -2,98 +2,12 @@ import re
 import torch
 import numpy as np
 
+from rusenttokenize import ru_sent_tokenize
+
 def sentencer(text:str, sen_num=1, min_segment_len=10):
-  puncts = '.!?'
-  
-  letters = 'абвгдеёзжийклмнопрстуфхцчшщыъьэюя'
-  
-  abbr = ['г', 'гор', 'в', 'вв', 'кг', 'м', 'мб', 'мин', 'мм', 'р', 'руб', 'с', 'сек', 'стр', 'см', 'тыс', 'т', 'тт', 'ч', 
-          'обл', 'о', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр', 'ц', 'гб', 'кб', 'ул', 'тов', 'спб', 'пп', 'тд', 'тп']
-
-  splitted = []
-
-  string = ''
-  i = 0
-  while True:
-    if i >= len(text):
-      if len(string) != 0:
-        splitted.append(string)
-      break
+  splitted = ru_sent_tokenize(text)
       
-    char = text[i]
-    string += char
-      
-    if char in puncts:
-      end_sentence_flag = True
-          
-      # Проверка не являеляется ли конец предложения - ?!
-      if i < len(text) - 1:
-        if text[i + 1] in puncts:
-          next_char = text[i + 1]
-          string += next_char
-          i += 1
-                  
-          # Проверка не являеляется ли конец предложения - ...
-          if i < len(text) - 1:
-            if text[i + 1] in puncts:
-              next_char = text[i + 1]
-              string += next_char
-              i += 1
-        # Проверка явялется ли знак пунктуации концом предложения
-        else:
-          if i < len(text) - 1:
-            # Если после знака пунктуации не идет пробел - значит не конец
-            if text[i + 1] != ' ':
-              end_sentence_flag = False
-            # Проверка не встречается ли где поблизости другие знаки пунктуации
-            if i < len(text) - 2:
-              if text[i + 2] in puncts:
-                end_sentence_flag = False
-            if i < len(text) - 3:
-              if text[i + 3] in puncts:
-                end_sentence_flag = False
-                                  
-      # Проверка не стоит ли точка перед сокращением
-      if i > 0 and end_sentence_flag:
-        if char == '.':
-          j = i - 1
-                  
-          # Строка для записи сокращения
-          abbr_str = ''
-          abbr_flag = True
-          
-          while True:
-          # Пока не дойдем до конца текста
-            if j > -1:
-              # Или пока не дойдем до конца слова
-              if text[j] != ' ':
-                # Запсиываем в строку
-                if text[j].lower() in letters:
-                  abbr_str += text[j]
-                j -= 1
-              else:
-                break
-            else:
-              break
-                  
-          # Развернем строку
-          abbr_str = abbr_str[::-1].lower()
-
-          # Если строка есть в списке сокращений - это не конец предложения
-          if abbr_str in abbr and abbr_flag:
-            end_sentence_flag = False              
-      # Если текст начинается с знака пунктуации - это не конец предложения    
-      else:
-        end_sentence_flag = False
-                                                  
-      if end_sentence_flag:
-        splitted.append(string)
-        string = ''
-        i += 1            
-          
-    i += 1
-      
-  final_splitted = []
+  merged_splitted = []
   
   string = ''
   i = 0
@@ -103,7 +17,7 @@ def sentencer(text:str, sen_num=1, min_segment_len=10):
         string += (splitted[i + j] + ' ')
           
       if len(string) >= min_segment_len:
-        final_splitted.append(string + ' ')
+        merged_splitted.append(string + ' ')
         string = ''
       else:
         while True:
@@ -112,88 +26,32 @@ def sentencer(text:str, sen_num=1, min_segment_len=10):
             i += 1
                       
             if len(string) >= min_segment_len:
-              final_splitted.append(string + ' ')
+              merged_splitted.append(string + ' ')
               string = ''
               break
           else:
-            final_splitted.append(string)
+            merged_splitted.append(string)
             break
     else:
       while i != len(splitted):
         string += (splitted[i] + ' ')
         i += 1
               
-      final_splitted.append(string)
+      merged_splitted.append(string)
       break
       
     i += sen_num
-      
-  return final_splitted
-
-# def sentencer(text:str, num_sen=1, default_sen_len=30):    
-#   splitted = []
-  
-#   string = ''
-#   i = 0
-#   while True:
-#     if i >= len(text):
-#       if splitted.count(text) == 0 and len(string) > 5:
-#         splitted.append(string)
-#       break
-
-#     char = text[i]
-#     string += char
     
-#     if char == '.' or char == '!' or char == '?':
+  del splitted
+  
+  return_splitted = []
     
-#       if(i < len(text) - 1):
-#         if text[i + 1] == '?':
-#           string += text[i + 1]
-#           i += 1
-          
-#       if(i < len(text) - 2):
-#         if text[i + 1] == '.' and text[i + 2] == '.':
-#           string += text[i + 1]
-#           string += text[i + 2]
-#           i += 2
+  for splitted in merged_splitted:
+      return_splitted.append(splitted[:-1])
       
-#       if len(string) < default_sen_len:
-#         i += 1
-#         continue
+  del merged_splitted
       
-#       splitted.append(string)
-      
-#       if i < len(text) - 1:
-#         i += 1
-      
-#       string = ''
-      
-#     i += 1
-  
-#   if num_sen == 1:
-#       return splitted
-  
-#   final_splitted = []
-  
-#   i = 0
-#   while (i + num_sen) < len(splitted):
-#       string = ''
-#       for j in range(num_sen):
-#           var = splitted[i + j] + ' '
-#           string += var
-          
-#       final_splitted.append(string)
-#       i += num_sen
-      
-#   end_string = ''
-#   for j in range(len(splitted) - i):
-#       var = splitted[i + j] + ' '
-#       end_string += var
-      
-#   if end_string != '':
-#       final_splitted.append(end_string)
-      
-#   return final_splitted
+  return return_splitted
     
 def remove_duplicates(input_list):
   return list(set(input_list))

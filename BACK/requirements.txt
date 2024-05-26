@@ -23,3 +23,4 @@ tqdm==4.65.0
 python-docx==1.1.2
 mwparserfromhell==0.6.6
 pywikibot==9.1.2
+rusenttokenize==0.0.5
