@@ -44,7 +44,7 @@ class wikiBot:
     def get_article_from_link(self, link):
         splitUrl = link.split('/')
         articleTitle = splitUrl[len(splitUrl)-1]
-        finalTitle = articleTitle[:len(articleTitle)-1]
+        finalTitle = articleTitle[:len(articleTitle)]
         ruArticleTitle = unquote(finalTitle) 
         print("ruArticleTitle: " + ruArticleTitle)
         return ruArticleTitle
