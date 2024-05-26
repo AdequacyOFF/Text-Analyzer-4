@@ -16,6 +16,8 @@ def sentencer(text:str, sen_num=1, min_segment_len=10):
   i = 0
   while True:
     if i >= len(text):
+      if len(string) != 0:
+        splitted.append(string)
       break
       
     char = text[i]
