@@ -3,6 +3,7 @@ from pymystem3 import Mystem
 
 import os
 import torch
+import numpy as np
 import gdown
 
 from NeuralNetwork.mlp_model import MLP
@@ -144,7 +145,7 @@ class TextAnalyser:
             probs = self.emotion_output(output)
             
         # Define prediction of the model
-        prediction = self.emotions_labels[torch.argmax(probs)]
+        prediction = self.emotions_labels[np.argmax(probs)]
         
         # Convert probabilities to percents
         neutral_percent = round(probs[0] * 100, 2)
@@ -166,7 +167,7 @@ class TextAnalyser:
         probs = self.style_output(data)
         
         # Define prediction of the model
-        prediction = self.style_labels[torch.argmax(probs)]
+        prediction = self.style_labels[np.argmax(probs)]
         
         # Convert probabilities to percents
         artistic_percent = round(probs[0] * 100, 2)
