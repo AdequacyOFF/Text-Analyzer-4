@@ -13,9 +13,10 @@ class TextAnalyser:
     def __init__(self, device='cuda:0'):
         # Device of the model
         if device == 'cuda:0' and not torch.cuda.is_available():
-            self.device == 'cpu'
+            self.device = 'cpu'
             print('\nCUDA is not available! Use CPU.')
         else:
+            print('\nGood news - CUDA is available!')
             self.device = device
         
         # Emotion classification labels
@@ -44,11 +45,15 @@ class TextAnalyser:
                                                                    problem_type='multi_label_classification')
         
         self.style_classifier = MLP(312, len(self.style_labels))
-        self.style_classifier.load_state_dict(torch.load(path_to_style_classifier))
-        
+
+        if self.device == 'cpu':
+            self.style_classifier.load_state_dict(torch.load(path_to_style_classifier, map_location=torch.device('cpu')))
+        else:
+            self.style_classifier.load_state_dict(torch.load(path_to_style_classifier))
+            
         # Put models on the device
         self.model = self.model.to(self.device)
-        self.style_classifier = self.style_classifier.to(device)
+        self.style_classifier = self.style_classifier.to(self.device)
         
         # Load list with profanity from the file
         self.profanity_list = []
