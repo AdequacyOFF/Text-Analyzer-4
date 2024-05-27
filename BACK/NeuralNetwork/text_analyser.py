@@ -1,21 +1,20 @@
-from mlp_model import MLP
-import utils as U
-
 from transformers import BertTokenizer, BertForSequenceClassification
 from pymystem3 import Mystem
 
 import os
 import torch
-import numpy as np
 import gdown
+
+from NeuralNetwork.mlp_model import MLP
+import NeuralNetwork.utils as U
+from NeuralNetwork.JsonMaker import makeJson
 
 class TextAnalyser:
     def __init__(self, device='cuda:0'):
         # Device of the model
-        if device == 'cuda:0':
-            self.device = U.get_device()
-            if self.device == 'cpu':
-                print('\nCUDA is not available! Use CPU.')
+        if device == 'cuda:0' and not torch.cuda.is_available():
+            self.device == 'cpu'
+            print('\nCUDA is not available! Use CPU.')
         else:
             self.device = device
         
@@ -85,6 +84,7 @@ class TextAnalyser:
             
             
     def emotion_output(self, data):
+        # If text is given
         if type(data) is str:
             # Tokenize text
             encoding = self.tokenizer.encode_plus(data,
@@ -107,29 +107,32 @@ class TextAnalyser:
             )
             
             out = outputs.logits
+        # If bert output is given
         else:
             out = self.model.classifier(data.pooler_output)
             
+        # Apply softmax to output 
         return torch.softmax(out, dim=1).view(-1).detach()
 
 
     def style_output(self, data):
+        # If text is given
         if type(data) is str:
             t = self.tokenizer(data, padding=True, truncation=True, return_tensors='pt')
-
-            with torch.no_grad():
-                model_output = self.model.bert(**{k: v.to(self.device) for k, v in t.items()})
-
+            
+            model_output = self.model.bert(**{k: v.to(self.device) for k, v in t.items()})
+            
             embeddings = model_output.last_hidden_state[:, 0, :]
-            embeddings = torch.nn.functional.normalize(embeddings)
+        # If bert output is given
         else:
             embeddings = data.last_hidden_state[:, 0, :]
-            embeddings = torch.nn.functional.normalize(embeddings)
+            
+        embeddings = torch.nn.functional.normalize(embeddings)
             
         # Put them to the MLP model
         output = self.style_classifier(embeddings[0])
         
-        # Apply softmax to output and turn data to numpy
+        # Apply softmax to output 
         return torch.softmax(output, dim=0).detach()
     
 
@@ -177,14 +180,16 @@ class TextAnalyser:
         
     
     def profanity_analys(self, text):
-        profanity_flag = False
-        # Check text for profanity
-        profanity_flag = bool(U.find_profanity(text, self.profanity_list, self.lemmatizer))
-        
-        return profanity_flag
+        r = U.find_intersection(U.split_words(text.lower()), self.profanity_list)
+        r1 = U.find_intersection(U.only_words(self.lemmatizer.lemmatize(text)), self.profanity_list)
+
+        if len(r) == 0 and len(r1) == 0:
+            return False
+        else:
+            return True
     
     
-    def summary(self, text, sen_num=2):
+    def summary(self, text, sen_num=2, to_json=True):
         bert_out = self.bert_output(text)
         
         style_result = self.style_analys(bert_out)
@@ -209,5 +214,8 @@ class TextAnalyser:
             out = self.emotion_analys(sentence)
             result.append(out)
         
-        return (result, total_emotion_result, style_result)
+        if to_json:
+            return makeJson(result, total_emotion_result, style_result)
+        else:
+            return (result, total_emotion_result, style_result)
     
