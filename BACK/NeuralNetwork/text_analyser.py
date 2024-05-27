@@ -215,8 +215,6 @@ class TextAnalyser:
             out = self.emotion_analys(sentence)
             result.append(out)
         
-        if to_json:
-            return makeJson(result, total_emotion_result, style_result)
-        else:
-            return (result, total_emotion_result, style_result)
+        return makeJson(result, total_emotion_result, style_result)
+    
     
