@@ -10,7 +10,7 @@ import numpy as np
 import gdown
 
 class TextAnalyser:
-    def __init__(self, device='cpu'):
+    def __init__(self, device='cuda:0'):
         # Device of the model
         if device == 'cuda:0':
             self.device = U.get_device()
