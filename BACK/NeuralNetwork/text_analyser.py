@@ -80,7 +80,7 @@ class TextAnalyser:
             attention_mask=attention_mask.unsqueeze(0)
         )
 
-        return outputs.detach()
+        return outputs
             
             
     def emotion_output(self, data):
