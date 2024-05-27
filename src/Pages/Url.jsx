@@ -8,12 +8,9 @@ function Url() {
 
   const location = useLocation();
   const redirectUrl = new URLSearchParams(location.search).get('redirect_url');
-  
   const [responseData, setResponseData] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-
-  
-
+  const [inputValue, setInputValue] = useState(redirectUrl);
+ 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -40,10 +37,6 @@ function Url() {
     }
   };
 
-  
-
-
-  
   return (
     <div className="section">
       {/* <p>{redirectUrl}</p> */}

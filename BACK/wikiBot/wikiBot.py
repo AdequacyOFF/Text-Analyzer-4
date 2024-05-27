@@ -42,7 +42,11 @@ class wikiBot:
         print("CSRF Token: " + self.csrfToken)
 
     def get_article_from_link(self, link):
-        splitUrl = link.split('/')
+        if "?title=" in link:
+            newLink = link.replace('?title=', '/')
+            print("link: " + newLink)
+        else: newLink = link
+        splitUrl = newLink.split('/')
         articleTitle = splitUrl[len(splitUrl)-1]
         finalTitle = articleTitle[:len(articleTitle)]
         ruArticleTitle = unquote(finalTitle) 

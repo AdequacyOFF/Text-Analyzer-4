@@ -1,7 +1,7 @@
 import React from "react";
 import { Mychart } from "./Chart.jsx";
 import { TotalChart } from "./TotalChart.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextStyle } from "./TextStyle.jsx";
 import { StyleConclusions } from "./TextStyleConclusion.jsx";
 import '../Pages_css/OutPutText.css';
@@ -12,19 +12,25 @@ function OutputText({ inputArray, articleLink = "https://baza.znanierussia.ru/me
   const [inputValue, setInputValue] = useState("");
   const [array, setArray] = useState(inputArray);
 
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
+  useEffect(() => {
+    setArray(inputArray);
+  }, [inputArray]);
 
-  const handleSubmit = (index) => {
+  useEffect(() => {
     fetch('http://127.0.0.1:8080/outputText/articleUpdate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ array }),
-    });
+    })
+  }, [array]);
 
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (index) => {
     fetch('http://127.0.0.1:8080/outputText/articleEdit', {
       method: 'POST',
       headers: {
