@@ -3,7 +3,6 @@ from pymystem3 import Mystem
 
 import os
 import torch
-import numpy as np
 import gdown
 
 from NeuralNetwork.mlp_model import MLP
@@ -113,7 +112,7 @@ class TextAnalyser:
             out = self.model.classifier(data.pooler_output)
             
         # Apply softmax to output 
-        return torch.softmax(out, dim=1).view(-1).cpu().detach().numpy()
+        return torch.softmax(out, dim=1).view(-1).detach()
 
 
     def style_output(self, data):
@@ -134,7 +133,7 @@ class TextAnalyser:
         output = self.style_classifier(embeddings[0])
         
         # Apply softmax to output 
-        return torch.softmax(output, dim=0).cpu().detach().numpy()
+        return torch.softmax(output, dim=0).detach()
     
 
     def emotion_analys(self, text, output=None):
@@ -145,15 +144,15 @@ class TextAnalyser:
             probs = self.emotion_output(output)
             
         # Define prediction of the model
-        prediction = self.emotions_labels[np.argmax(probs)]
+        prediction = self.emotions_labels[torch.argmax(probs)]
         
         # Convert probabilities to percents
-        neutral_percent = round(probs[0] * 100, 2)
-        joy_percent = round(probs[1] * 100, 2)
-        sadness_percent = round(probs[2] * 100, 2)
-        surprise_percent = round(probs[3] * 100, 2)
-        fear_percent = round(probs[4] * 100, 2)
-        anger_percent = round(probs[5] * 100, 2)
+        neutral_percent = round(probs[0].item() * 100, 2)
+        joy_percent = round(probs[1].item() * 100, 2)
+        sadness_percent = round(probs[2].item() * 100, 2)
+        surprise_percent = round(probs[3].item() * 100, 2)
+        fear_percent = round(probs[4].item() * 100, 2)
+        anger_percent = round(probs[5].item() * 100, 2)
         
         # Make profanity analys
         prof_flag = self.profanity_analys(text)
@@ -167,14 +166,14 @@ class TextAnalyser:
         probs = self.style_output(data)
         
         # Define prediction of the model
-        prediction = self.style_labels[np.argmax(probs)]
+        prediction = self.style_labels[torch.argmax(probs)]
         
         # Convert probabilities to percents
-        artistic_percent = round(probs[0] * 100, 2)
-        publicistic_percent = round(probs[1] * 100, 2)
-        scientific_percent = round(probs[2] * 100, 2)
-        conversational_percent = round(probs[3] * 100, 2)
-        official_percent = round(probs[4] * 100, 2)
+        artistic_percent = round(probs[0].item() * 100, 2)
+        publicistic_percent = round(probs[1].item() * 100, 2)
+        scientific_percent = round(probs[2].item() * 100, 2)
+        conversational_percent = round(probs[3].item() * 100, 2)
+        official_percent = round(probs[4].item() * 100, 2)
         
         return (prediction, artistic_percent, publicistic_percent, scientific_percent, 
                 conversational_percent, official_percent)
