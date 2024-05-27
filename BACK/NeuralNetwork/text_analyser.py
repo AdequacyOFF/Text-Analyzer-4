@@ -1,6 +1,5 @@
-from NeuralNetwork.mlp_model import MLP
-import NeuralNetwork.utils as U
-from NeuralNetwork.JsonMaker import makeJson
+from mlp_model import MLP
+import utils as U
 
 from transformers import BertTokenizer, BertForSequenceClassification
 from pymystem3 import Mystem
@@ -17,8 +16,6 @@ class TextAnalyser:
             self.device = U.get_device()
             if self.device == 'cpu':
                 print('\nCUDA is not available! Use CPU.')
-            else:
-                print('\nCUDA is available! Use CUDA.')
         else:
             self.device = device
         
@@ -26,7 +23,7 @@ class TextAnalyser:
         self.emotions_labels = ['neutral', 'joy', 'sadness', 'surprise', 'fear', 'anger']
         
         # Text style classification labels
-        self.style_labels = ['Художественный', 'Публицистический', 'Научный', 'Разговорный', 'Официально-деловой']
+        self.style_labels = ['artistic', 'publicistic', 'scientific', 'conversational', 'official']
         
         # Define parent directory for finding path to model checkpoint
         # and file with profanity 
@@ -48,19 +45,11 @@ class TextAnalyser:
                                                                    problem_type='multi_label_classification')
         
         self.style_classifier = MLP(312, len(self.style_labels))
-
-        if device == 'cpu':
-            self.style_classifier.load_state_dict(torch.load(path_to_style_classifier, map_location=torch.device('cpu')))
-        else:
-            self.style_classifier.load_state_dict(torch.load(path_to_style_classifier))
+        self.style_classifier.load_state_dict(torch.load(path_to_style_classifier))
         
         # Put models on the device
         self.model = self.model.to(self.device)
         self.style_classifier = self.style_classifier.to(device)
-        
-        # Set evaluation mode
-        self.model.eval()
-        self.style_classifier.eval()
         
         # Load list with profanity from the file
         self.profanity_list = []
@@ -71,21 +60,8 @@ class TextAnalyser:
                     
         self.lemmatizer = Mystem()
         
-        
-    def get_embeddings(self, text):
-        t = self.tokenizer(text, padding=True, truncation=True, return_tensors='pt')
-
-        with torch.no_grad():
-            model_output = self.model.bert(**{k: v.to(self.device) for k, v in t.items()})
-
-        embeddings = model_output.last_hidden_state[:, 0, :]
-        embeddings = torch.nn.functional.normalize(embeddings)
-
-        return embeddings[0]
-            
-        
-    def emotion_output(self, text):
-        # Get embeddings from the tokenizer
+    
+    def bert_output(self, text):
         encoding = self.tokenizer.encode_plus(text,
             add_special_tokens=True,
             max_length=512,
@@ -96,67 +72,105 @@ class TextAnalyser:
             return_tensors='pt'
         )
         
-        out = { 'text': text,
-                'input_ids': encoding['input_ids'].flatten(),
-                'attention_mask': encoding['attention_mask'].flatten() 
-                }
-        
-        input_ids = out["input_ids"].to(self.device)
-        attention_mask = out["attention_mask"].to(self.device)
-        
+        input_ids = encoding['input_ids'].flatten().to(self.device)
+        attention_mask = encoding['attention_mask'].flatten().to(self.device)
+
         # Pass data throw thr model
-        outputs = self.model(
+        outputs = self.model.bert(
             input_ids=input_ids.unsqueeze(0),
             attention_mask=attention_mask.unsqueeze(0)
         )
-        
-        return torch.softmax(outputs.logits, dim=1).view(-1).cpu().detach().numpy()
-    
-    
-    def style_output(self, text):
-        # Get embeddings from the bert model
-        embs = self.get_embeddings(text)
+
+        return outputs.detach()
+            
+            
+    def emotion_output(self, data):
+        if type(data) is str:
+            # Tokenize text
+            encoding = self.tokenizer.encode_plus(data,
+                add_special_tokens=True,
+                max_length=512,
+                return_token_type_ids=False,
+                truncation=True,
+                padding='max_length',
+                return_attention_mask=True,
+                return_tensors='pt'
+            )
+            
+            input_ids = encoding['input_ids'].flatten().to(self.device)
+            attention_mask = encoding['attention_mask'].flatten().to(self.device)
+            
+            # Pass data throw the model
+            outputs = self.model(
+                input_ids=input_ids.unsqueeze(0),
+                attention_mask=attention_mask.unsqueeze(0)
+            )
+            
+            out = outputs.logits
+        else:
+            out = self.model.classifier(data.pooler_output)
+            
+        return torch.softmax(out, dim=1).view(-1).detach()
+
+
+    def style_output(self, data):
+        if type(data) is str:
+            t = self.tokenizer(data, padding=True, truncation=True, return_tensors='pt')
+
+            with torch.no_grad():
+                model_output = self.model.bert(**{k: v.to(self.device) for k, v in t.items()})
+
+            embeddings = model_output.last_hidden_state[:, 0, :]
+            embeddings = torch.nn.functional.normalize(embeddings)
+        else:
+            embeddings = data.last_hidden_state[:, 0, :]
+            embeddings = torch.nn.functional.normalize(embeddings)
+            
         # Put them to the MLP model
-        output = self.style_classifier(embs)
+        output = self.style_classifier(embeddings[0])
         
         # Apply softmax to output and turn data to numpy
-        return torch.softmax(output, dim=0).cpu().detach().numpy()
+        return torch.softmax(output, dim=0).detach()
     
-    
-    def emotion_analys(self, text):
+
+    def emotion_analys(self, text, output=None):
         # Get probabilities from the model
-        probs = self.emotion_output(text)
-        
+        if output is None:
+            probs = self.emotion_output(text)
+        else:
+            probs = self.emotion_output(output)
+            
         # Define prediction of the model
-        prediction = self.emotions_labels[np.argmax(probs)]
+        prediction = self.emotions_labels[torch.argmax(probs)]
         
         # Convert probabilities to percents
-        neutral_percent = round(probs[0] * 100, 2)
-        joy_percent = round(probs[1] * 100, 2)
-        sadness_percent = round(probs[2] * 100, 2)
-        surprise_percent = round(probs[3] * 100, 2)
-        fear_percent = round(probs[4] * 100, 2)
-        anger_percent = round(probs[5] * 100, 2)
+        neutral_percent = round(probs[0].item() * 100, 2)
+        joy_percent = round(probs[1].item() * 100, 2)
+        sadness_percent = round(probs[2].item() * 100, 2)
+        surprise_percent = round(probs[3].item() * 100, 2)
+        fear_percent = round(probs[4].item() * 100, 2)
+        anger_percent = round(probs[5].item() * 100, 2)
         
         # Make profanity analys
         prof_flag = self.profanity_analys(text)
+        
         return (text, prediction, neutral_percent, joy_percent, sadness_percent, 
                 surprise_percent, fear_percent, anger_percent, prof_flag)
-        
-        
-    def style_analys(self, text):
+    
+
+    def style_analys(self, data):
         # Get probabilities from the model
-        probs = self.style_output(text)
+        probs = self.style_output(data)
         
         # Define prediction of the model
-        prediction = self.style_labels[np.argmax(probs)]
+        prediction = self.style_labels[torch.argmax(probs)]
         
         # Convert probabilities to percents
-        artistic_percent = round(probs[0] * 100, 2)
-        publicistic_percent = round(probs[1] * 100, 2)
-        scientific_percent = round(probs[2] * 100, 2)
-        conversational_percent = round(probs[3] * 100, 2)
-        official_percent = round(probs[4] * 100, 2)
+        artistic_percent = round(probs[0].item() * 100, 2)
+        publicistic_percent = round(probs[1].item() * 100, 2)
+        scientific_percent = round(probs[2].item() * 100, 2)
+        conversational_percent = round(probs[3].item() * 100, 2)
+        official_percent = round(probs[4].item() * 100, 2)
         
         return (prediction, artistic_percent, publicistic_percent, scientific_percent, 
                 conversational_percent, official_percent)
@@ -171,13 +185,15 @@ class TextAnalyser:
     
     
     def summary(self, text, sen_num=2):
-        style_result = self.style_analys(text)
+        bert_out = self.bert_output(text)
+        
+        style_result = self.style_analys(bert_out)
         
         # Split text on pairs of <sen_num> sentences
         sentences = U.sentencer(text, sen_num)
         
         # Probabilities for the whole text
-        total = self.emotion_analys(text)
+        total = self.emotion_analys(text, bert_out)
         total_emotion_result = (total[1], 
                                 total[2], 
                                 total[3], 
@@ -192,5 +208,6 @@ class TextAnalyser:
         for sentence in sentences:
             out = self.emotion_analys(sentence)
             result.append(out)
-        print(result)
-        return (makeJson(result, total_emotion_result, style_result))
+        
+        return (result, total_emotion_result, style_result)
+    
