@@ -7,7 +7,7 @@ function Contacts() {
             <img src="src\Images\GitHub.png" alt="GitHub" onClick={() => window.open("https://github.com/AdequacyOFF")}/>
             <img src="src\Images\mail.png" alt="Mail" onClick={() => window.open("https://yandex.ru")}/>
           </div>
-          <p>©2024 AdequacyOFF</p>
+          <p>©2024 AdequacyOFFjggv</p>
         </div>
       </div>
     )
