@@ -84,7 +84,7 @@ function OutputText({ inputArray, articleLink = "https://baza.znanierussia.ru/me
           }
           {item["profanity_flag"] && (
             <div className="profanity_flag_block">
-              <span className="profanity_flag"><span className="profanity_flag_attention">Внимание: </span>Текст содержит ненормативную лексику</span>
+              <span className="profanity_flag"><span className="profanity_flag_attention">Внимание: </span>В тексте упоминается военная тематика</span>
             </div>
           )}
           {<hr className='Strip'></hr>}
